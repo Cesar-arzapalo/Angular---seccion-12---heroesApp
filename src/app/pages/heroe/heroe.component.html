@@ -1,0 +1,68 @@
+<div class="row mb-3">
+    <div class="col">
+        <div class="row">
+            <div class="col-9">
+                <h1>Héroe a {{configuracion}}</h1>
+            </div>
+            <div class="col-3 text-right">
+                <button class="btn btn-outline-danger" style="height: 100%" routerLink="/heroes">
+                    <i class="fa fa-arrow-left"> Regresar</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form [formGroup]="forms" (ngSubmit)="agregarHeroe()">
+            <div class="forms-group row mt-2 mb-2">
+                <label class=" col-3 col-from-label">ID Heroe: </label>
+                <div class="col">
+                    <input class="form-control" placeholder="HeroeID" type="text" formControlName="firebaseID" [class.is-invalid]="valorNoValido('firebaseID')">
+                    <span class="text-secondary mt-1"> Este campo es autogenerado</span>
+                </div>
+
+            </div>
+            <div class="forms-group row mt-3 mb-3">
+                <label class=" col-3 col-from-label">Nombre del heroe: </label>
+                <div class="col">
+                    <input class="form-control" placeholder="Nombre del heroe" type="text" formControlName="nombre" [class.is-invalid]="valorNoValido('nombre')">
+                    <span class="text-danger mt-1" *ngIf="valorNoValido('nombre')"> Por favor ingresar el nombre del heroe</span>
+                </div>
+
+            </div>
+            <div class="forms-group row mt-3 mb-3">
+                <label class=" col-3 col-from-label">Poder: </label>
+                <div class="col">
+                    <input class="form-control" placeholder="Poder del heroe" type="text" formControlName="poder" [class.is-invalid]="valorNoValido('poder')">
+                    <span class="text-danger mt-1" *ngIf="valorNoValido('poder')"> Por favor ingresar el poder del heroe</span>
+                </div>
+
+            </div>
+            <div class="forms-group row mt-3 mb-3">
+                <label class=" col-3 col-from-label">Estado: </label>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="form-control btn" [ngClass]="btnVivo" type="button" (click)="estadoHeroe(true)">
+                                <i class="fa fa-smile-wink"> Vivo</i>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button class="form-control btn" [ngClass]="btnMuerto" type="button" (click)="estadoHeroe(false)">
+                                <i class=" fa fa-dizzy"> Muerto</i>
+                            </button>
+                        </div>
+                    </div>
+                    <span class="text-danger mt-1" *ngIf="forms.get('estado').value === null && forms.get('estado').dirty"> Por favor seleccionar el estado del heroe</span>
+                </div>
+
+            </div>
+            <div class="mt-4 mb-3 text-center">
+                <button class="form-control btn btn-outline-primary btn-block" type="submit">Añadir</button>
+            </div>
+        </form>
+    </div>
+</div>
